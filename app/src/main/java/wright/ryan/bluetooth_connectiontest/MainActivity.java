@@ -96,7 +96,7 @@ public class MainActivity extends Activity {
         connect =(Button) findViewById(R.id.btnCn);
         disconnect =(Button) findViewById(R.id.btnDsc);
         devices = (ListView) findViewById(R.id.devices);
-        deviceNameAdapter = new ArrayAdapter<> ( this, android.R.layout.simple_list_item_1, android.R.id.text1, deviceNameList );
+        deviceNameAdapter = new ArrayAdapter<> ( this, R.layout.my_listview_item, R.id.text1, deviceNameList );
 
         devices.setAdapter(deviceNameAdapter);
         /** set display view **/
@@ -149,6 +149,7 @@ public class MainActivity extends Activity {
                 disconnect.setVisibility(View.GONE);
                 connect.setVisibility(View.VISIBLE);
                 statusUpdate.setText("Bluetooth Off");
+                deviceNameList.clear();
 
             }
         });/** End of disconnect onClickListener **/

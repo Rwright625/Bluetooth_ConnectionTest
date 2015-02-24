@@ -55,6 +55,5 @@
         android:id="@+id/devices"
         android:layout_below="@+id/btnDsc"
         android:layout_alignRight="@+id/btnDsc"
-        android:layout_alignEnd="@+id/btnDsc"
-        android:background="#ffffff"/>
+        android:layout_alignEnd="@+id/btnDsc"/>
 </RelativeLayout>
