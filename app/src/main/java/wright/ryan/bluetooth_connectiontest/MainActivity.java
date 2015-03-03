@@ -97,9 +97,10 @@ public class MainActivity extends Activity {
         devices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), ""+position, Toast.LENGTH_SHORT).show();
                 String itemValue = (String) devices.getItemAtPosition(position);
-                String MAC = itemValue.substring(itemValue.length() - 17);
+                String MAC = itemValue.substring(itemValue.length() - 17).trim();
+                Toast.makeText(getApplicationContext(), MAC, Toast.LENGTH_SHORT).show();
                 BluetoothDevice bluetoothDevice = btAdapter.getRemoteDevice(MAC);
                 // Initiate  a connection request in a seperate thread
                 ConnectThread t = new ConnectThread(bluetoothDevice);
@@ -234,10 +235,8 @@ public class MainActivity extends Activity {
             remoteDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
             String pairDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE);
 
-            String remoteDeviceName = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
-            if (remoteDeviceName == null){
-                remoteDeviceName = remoteDevice.getAddress();
-            }
+            String remoteDeviceName = intent.getStringExtra(BluetoothDevice.EXTRA_NAME)+" "+remoteDevice.getAddress();
+
 
             //toastText = "Discovered: " + remoteDeviceName;
             //Toast.makeText(MainActivity.this, toastText, Toast.LENGTH_SHORT).show();
@@ -319,9 +318,10 @@ public class MainActivity extends Activity {
             BluetoothSocket bluetoothSocket;
             // This will block while listening until a BluetoothSocket is returned
             // or an exception occurs
-            while (true) {
+            if(bluetoothServerSocket != null)
+                while (true) {
                 try {
-                    bluetoothSocket = bluetoothServerSocket.accept();
+                        bluetoothSocket = bluetoothServerSocket.accept();
                 } catch (IOException e) {
                     break;
                 }
